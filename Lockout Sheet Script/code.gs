@@ -26,7 +26,7 @@ function myFunction()
 
 function scanFolder(path)
 {
-  const GIT_API_URL = `https://api.github.com/repos/REPO_OWNER_NAME/REPO_NAME/contents/$(paht)?ref=main`; // NEEDS EDITED
+  const GIT_API_URL = `https://api.github.com/repos/REPO_OWNER_NAME/REPO_NAME/contents/$(path)?ref=main`; // NEEDS EDITED
 
   var urlFetchOptions = 
   {
