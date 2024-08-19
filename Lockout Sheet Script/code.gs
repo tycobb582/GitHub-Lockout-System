@@ -1,11 +1,11 @@
 let files = [];
-var AUTH_TOKEN = "INSERT AUTH HERE";
+var AUTH_TOKEN = "INSERT AUTH HERE";  // NEEDS EDITED
 
 function myFunction() 
 {
   scanFolder("Content");
   var app = SpreadsheetApp;
-  var lockoutSpread = app.openByUrl("LINK TO YOUR SPREADSHEET");
+  var lockoutSpread = app.openByUrl("LINK TO YOUR SPREADSHEET");  // NEEDS EDITED
   var lockoutSheet = lockoutSpread.getSheetByName("Sheet1");
   files.sort();
   for (i = 2; i < files.length; i++)
@@ -26,8 +26,7 @@ function myFunction()
 
 function scanFolder(path)
 {
-  //Logger.log(path);
-  const GIT_API_URL = `API LINK TO YOUR REPO`;
+  const GIT_API_URL = `https://api.github.com/repos/REPO_OWNER_NAME/REPO_NAME/contents/$(paht)?ref=main`; // NEEDS EDITED
 
   var urlFetchOptions = 
   {
