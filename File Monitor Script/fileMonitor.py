@@ -21,7 +21,7 @@ USER_ID = os.environ.get("USER_ID")
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")
 SHEETS_API_KEY = os.environ.get("SHEETS_API_KEY")
 SHEET_ID = os.environ.get("SHEET_ID")
-DISCORD_AUTH = os.environ.get("DISCORD_AUTH")
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 GUILD_ID = os.environ.get("GUILD_ID")
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 # You can download your service account's JSON from the Credentials tab in Google Cloud's APIs & Services section
@@ -122,7 +122,7 @@ async def monitorFiles():
     """
     async with aiohttp.ClientSession() as session:
         partialWebhook = Webhook.from_url(WEBHOOK_URL, session=session)
-        partialWebhook.auth_token = DISCORD_AUTH
+        partialWebhook.auth_token = BOT_TOKEN
         webhook = await partialWebhook.fetch()
         print(webhook.type)
         try:
