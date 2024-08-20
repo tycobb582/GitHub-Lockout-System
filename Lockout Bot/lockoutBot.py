@@ -34,7 +34,6 @@ maintainedMessage: Message = None
 
 
 def scanSheet():
-    global timeSinceLastScan
     result = sheets.values().get(spreadsheetId=SHEET_ID, range="Sheet1").execute()
     values = result.get('values', [])
     checkedOut = []
