@@ -17,7 +17,7 @@ function myFunction()
     if (values[2] == "")
       newValues.push("No");
     else
-      newValues.push[values[1]];
+      newValues.push(values[1]);
     newValues.push(values[2]);
     Logger.log(newValues);
     rowRange.setValues([newValues]);
