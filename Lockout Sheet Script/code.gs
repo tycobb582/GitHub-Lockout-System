@@ -8,18 +8,23 @@ function myFunction()
   var lockoutSpread = app.openByUrl("LINK TO YOUR SPREADSHEET");  // NEEDS EDITED
   var lockoutSheet = lockoutSpread.getSheetByName("Sheet1");
   files.sort();
-  for (i = 2; i < files.length; i++)
+  for (i = 2; i < files.length + 2; i++)
   {
-    var rowRange = lockoutSheet.getRange(i, 1, 1, 3);
+    var fileName = files[i-2];
+    var newValues = [fileName]
+    var currentIndexOfFile = binarySearchForFile(files, fileName);
+    var rowRange = lockoutSheet.getRange(currentIndexOfFile + 2, 1, 1, 3);
     var values = rowRange.getValues()[0];
-    Logger.log(values);
-    var newValues = [files[i-2]]
-    if (values[2] == "")
-      newValues.push("No");
+    if (currentIndexOfFile == -1) // New file introduced to the system
+    {
+        newValues.push("No");
+        newValues.push("");
+    }
     else
+    {
       newValues.push(values[1]);
-    newValues.push(values[2]);
-    Logger.log(newValues);
+      newValues.push(values[2]);
+    }
     rowRange.setValues([newValues]);
   }
 }
@@ -60,4 +65,38 @@ function scanFolder(path)
       }
     }
   }
+}
+
+function binarySearchForFile(files, query)
+{
+    lowIndex = 0;
+    highIndex = files.length - 1;
+    while (lowIndex <= highIndex) 
+    {
+        var midpoint = lowIndex + (highIndex - lowIndex) // 2;
+
+        // Check if query is present at mid
+        if (files[midpoint] == query)
+            return midpoint;
+
+        // If query is greater greater alphabetically, ignore left half
+        if (alphabeticalSortCheck(query, files[midpoint]) == 1)
+            lowIndex = midpoint + 1;
+
+        // If query is lower alphabetically, ignore right half
+        else
+            highIndex = midpoint - 1;
+    }
+
+    // If we reach here, then element was not present
+    return -1;
+}
+
+function alphabeticalSortCheck(stringToCheck, stringToCheckAgainst)
+{
+  var stagingArray = [stringToCheck, stringToCheckAgainst];
+  stagingArray.sort();
+  if (stagingArray[0] == stringToCheck)
+    return -1;
+  return 1;
 }
